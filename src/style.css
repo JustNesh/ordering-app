@@ -1,3 +1,32 @@
 body{
-  margin: 0;
+  margin: 0 auto;
+  font-family: "Smythe", system-ui;
+  font-style: normal;
+}
+
+.outer-container{
+  width: 500px;
+}
+
+header{
+  background: url("../public/images/header-bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top -125px;
+  color: whitesmoke;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1,h2{
+  margin: 2.5px 0;
+  margin-left: 50px;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+h2{
+  font-size: 18px;
 }
