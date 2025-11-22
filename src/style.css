@@ -8,6 +8,8 @@ body{
   width: 500px;
 }
 
+/* Header Section */
+
 header{
   background: url("../public/images/header-bg.png");
   background-repeat: no-repeat;
@@ -29,4 +31,43 @@ h1,h2{
 
 h2{
   font-size: 18px;
+}
+
+/* Item Choices */
+
+.items-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+i{
+  font-size: 60px;
+  margin-left: 20px;
+}
+
+.food-information{
+  margin-right: auto;
+  margin-left: 30px;
+}
+
+.ingredients{
+  font-weight: 100;
+  color: #8B8B8B;
+}
+
+.item-price{
+  font-weight: 1000;
+}
+
+.add-item{
+  font-size: 30px;
+  font-family: Courier, monospace;
+  font-weight: 500;
+  border-radius: 100%;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: 1px solid lightgrey;
 }
