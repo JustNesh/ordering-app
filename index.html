@@ -18,69 +18,28 @@
       </header>
       <main>
         <!-- Menu -->
-        <section class="outer-items-container">
-          <div class="items-container">
-            <img class="icon" src="./public/pizza.png" alt="pizza" />
-            <div class="food-information">
-              <h3 class="food">Pizza</h3>
-              <p class="ingredients">pepperoni,mushroom,mozarrella</p>
-              <p class="item-price">$14</p>
-            </div>
-            <button data-food="pizza" class="add-item">+</button>
-          </div>
-          <div class="item-seperator"></div>
-          <div class="items-container">
-            <img class="icon" src="./public/hamburger.png" alt="hamburger" />
-            <div class="food-information">
-              <h3 class="food">Hamburger</h3>
-              <p class="ingredients">beff,cheese,lettuce</p>
-              <p class="item-price">$12</p>
-            </div>
-            <button data-food="hamburger" class="add-item">+</button>
-          </div>
-          <div class="item-seperator"></div>
-          <div class="items-container">
-            <img class="icon" src="./public/beer.png" alt="beer" />
-            <div class="food-information">
-              <h3 class="food">Beer</h3>
-              <p class="ingredients">grain,hops,yeast,water</p>
-              <p class="item-price">$12</p>
-            </div>
-            <button data-food="beer" class="add-item">+</button>
-          </div>
-          <div class="item-seperator"></div>
-        </section>
+        <section id="outer-items-container" class="outer-items-container"></section>
         <!-- Order Info Container -->
         <section class="order-info-container" id="order-info-container">
           <p id="order-header">Your order</p>
-          <div class="items-prices-container">
-            <div class="inner-item-prices-container">
-              <p class="item">Pizza</p>
-              <button class="remove-btn" data-food-to-remove="Pizza">remove</button>
-              <p class="price">$14</p>
-            </div>
-            <div class="inner-item-prices-container">
-              <p class="bold-item item">Beer</p>
-              <button class="remove-btn" data-food-to-remove="Pizza">remove</button>
-              <p class="price">$12</p>
-            </div>
-          </div>
+          <div id="items-prices-container" class="items-prices-container"></div>
           <div class="order-item-seperator"></div>
           <div class="total-price-container">
             <p id="total-price-header">Total price:</p>
-            <p class="price">$26</p>
+            <p id="total-price-value" class="price">$0</p>
           </div>
           <button id="complete-order-btn">Complete Order</button>
         </section>
+        <!-- Popup Modal for Checkout -->
         <form class="user-checkout-modal hidden" id="user-checkout-modal" aria-hidden="true">
           <p>Enter card details</p>
           <input id="full-name" type="text" placeholder="Enter your name"/>
           <input id="card-number" type="text" placeholder="Enter card number"/>
           <input id="cvv" type="text" placeholder="Enter CVV"/>
-          <button>Pay</button>
+          <button id="pay-btn">Pay</button>
         </form>
       </main>
     </div>
-    <!-- <script type="module" src="/src/main.js"></script> -->
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
