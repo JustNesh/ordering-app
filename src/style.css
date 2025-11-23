@@ -1,11 +1,18 @@
 body{
-  margin: 0 auto;
   font-family: "Smythe", system-ui;
   font-style: normal;
+  width: 100vw;
+  background-color: #f0eeee;
+  padding: 0;
+  margin: 0;
 }
 
 .outer-container{
   width: 500px;
+  margin: 0 auto;
+  /* border: solid 1px #d2d2d2; */
+  background-color: white;
+  padding-bottom: 30px;
 }
 
 /* Header Section */
@@ -39,11 +46,14 @@ h2{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px 0;
 }
 
-i{
-  font-size: 60px;
+.icon{
+  margin: 12px 0 0 0;
+  padding: 0;
   margin-left: 20px;
+  width: 14%;
 }
 
 .food-information{
@@ -51,23 +61,179 @@ i{
   margin-left: 30px;
 }
 
+.food{
+  font-weight: 500;
+  font-size: 1.6rem;
+  margin: 10px 0 0 0;
+}
+
 .ingredients{
+  margin: 5px 0 0 0;
   font-weight: 100;
   color: #8B8B8B;
 }
 
 .item-price{
-  font-weight: 1000;
+  font-weight: 500;
+  margin: 10px 0 0 0;
 }
 
 .add-item{
+  text-align: center;
   font-size: 30px;
-  font-family: Courier, monospace;
-  font-weight: 500;
+  font-family: "inter", monospace;
+  font-weight: 100;
+  background-color: white;
   border-radius: 100%;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
+  padding: 0px 8px 5px 8px;
+  height: fit-content;
+  width: fit-content;
+  margin-right: 30px;
   cursor: pointer;
-  border: 1px solid lightgrey;
+  border: 1px solid #d2d2d2;
+  transition: all .25s;
+}
+
+.add-item:hover,.add-item:active{
+  background-color: rgb(240, 240, 240);
+}
+
+.item-seperator{
+  height: 1px;
+  width: 85%;
+  display: block;
+  margin: 20px auto 0 auto;
+  background-color: #d2d2d2;
+}
+
+/* Order info container */
+
+.order-info-container{
+  margin: 0 30px;
+}
+
+#order-header{
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.items-prices-container{
+  display: block;
+}
+
+.inner-item-prices-container{
+  display: flex;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.item{
+  font-size: 24px;
+  margin: 0;
+}
+
+.remove-btn{
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  color: #BBBBBB;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.price{
+  margin: 0;
+  margin-left: auto;
+  margin-right: 10px;
+  font-size: 22px;
+}
+
+.order-item-seperator{
+  width: 95%;
+  height: 1px;
+  background-color: black;
+  margin: 0 auto;
+}
+
+.total-price-container{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#total-price-header{
+  margin: 0;
+  margin-left: 10px;
+  font-size: 24px;
+}
+
+#complete-order-btn{
+  display: block;
+  width: 95%;
+  margin: 20px auto 0 auto;
+  background-color: #16DB99;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 15px 0;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+#complete-order-btn:hover{
+  background-color: #15c58b;
+}
+
+/* Modal Checkout */
+.hidden{
+  display: none;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: white;
+  position: fixed;
+  width: 350px;
+  height: 330px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 500px black;
+  padding: 30px;
+  gap: 10px;
+}
+
+form p{
+  font-size: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 600;
+}
+
+form input{
+  font-size: 16px;
+  padding: 15px 10px 15px 30px;
+  border: 1px solid #8B8B8B;
+}
+
+form input::placeholder{
+  color: #8B8B8B;
+}
+
+form button{
+  display: block;
+  width: 100%;
+  margin: 20px auto 0 auto;
+  background-color: #16DB99;
+  border: none;
+  color: white;
+  font-weight: 600;
+  padding: 15px 0;
+  cursor: pointer;
+  transition: all .25s;
+}
+
+form button:hover{
+  background-color: #15c58b;
 }
