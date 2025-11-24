@@ -137,7 +137,7 @@ function renderMenuArray(){
     menuArray.forEach((current)=>{
         menuItemsHtml+= `
             <div class="items-container">
-            <img class="icon" src="./public/${current.name.toLowerCase()}.png" alt="photo of ${current.name}" />
+            <img class="icon" src="/images/${current.name.toLowerCase()}.png" alt="photo of ${current.name}" />
             <div class="food-information">
               <h3 class="food">${current.name}</h3>
               <p class="ingredients">${current.ingredients.join(", ")}</p>
