@@ -2,6 +2,7 @@ import menuArray from './data.js'
 import {generateUUID, randomizeBetweenNumberToChar} from './helperFunctions.js';
 const DISCOUNT = .2;
 const userCheckoutModal = document.getElementById("user-checkout-modal");
+const orderInfoContainerEl = document.getElementById("order-info-container");
 let orderArray = [];
 let isAllowedToPay = false;
 let totalCost = 0;
@@ -24,7 +25,9 @@ document.querySelector("form").addEventListener("submit",(e)=>{
     if(isAllowedToPay){
         const fName = document.getElementById("full-name").value.split(" ")[0];
         document.querySelector("form").classList.add("hidden");
-        alert(`Thanks ${fName}!`)
+        orderInfoContainerEl.innerHTML = `
+            <div class="thank-you">Thanks, ${fName}! Your order is on its way!</div>
+        `
     }
 })
 
@@ -79,7 +82,6 @@ function handleRemoveItem(event){
 
 //Renders orders onto the screen from the global orderArray variable
 function renderOrders(){
-    const orderInfoContainerEl = document.getElementById("order-info-container");
     const itemsPricesContainer = document.getElementById("items-prices-container");
     orderArray.length < 1 ? orderInfoContainerEl.classList.add("hidden"): orderInfoContainerEl.classList.remove("hidden")
     let orderArrayHtml = "";
