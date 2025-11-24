@@ -1,7 +1,11 @@
 import menuArray from './data.js'
 import {generateUUID, randomizeBetweenNumberToChar} from './helperFunctions.js';
+const DISCOUNT = .2;
+const userCheckoutModal = document.getElementById("user-checkout-modal");
 let orderArray = [];
 let isAllowedToPay = false;
+let totalCost = 0;
+let burgerPizzaBeerDiscount = false;
 
 document.addEventListener("click",(event)=>{
     if(event.target.dataset.food){
@@ -10,6 +14,8 @@ document.addEventListener("click",(event)=>{
         handleRemoveItem(event)
     } else if(event.target.id === "complete-order-btn"){
         document.querySelector("form").classList.remove("hidden");
+    } else if (!userCheckoutModal.classList.contains("hidden") && !userCheckoutModal.contains(event.target)){
+        userCheckoutModal.classList.toggle("hidden")
     }
 })
 
@@ -21,10 +27,6 @@ document.querySelector("form").addEventListener("submit",(e)=>{
         alert(`Thanks ${fName}!`)
     }
 })
-
-//This is here, because we need to compare the previous input from itself so the backspace
-//works on the input event listener for the card-number input element
-let previousCardInput = "";
 
 document.addEventListener("input", (event)=>{
     const eventId = event.target.id;
@@ -57,7 +59,7 @@ document.addEventListener("input", (event)=>{
        }
 })
 
-
+// Plus button functionality
 function handleAddItem(event){
     const menuItemToAdd = menuArray.filter((current)=>current.name === event.target.dataset.food)[0];
     orderArray.push({
@@ -68,32 +70,65 @@ function handleAddItem(event){
     renderOrders()
 }
 
+//Remove button functionality
 function handleRemoveItem(event){
     const uuidToRemove = event.target.dataset.foodUuid;
     orderArray = orderArray.filter((current)=>current.uuid!=uuidToRemove);
     renderOrders()
 }
 
+//Renders orders onto the screen from the global orderArray variable
 function renderOrders(){
     const orderInfoContainerEl = document.getElementById("order-info-container");
     const itemsPricesContainer = document.getElementById("items-prices-container");
-    const priceEl = document.getElementById("total-price-value");
-
     orderArray.length < 1 ? orderInfoContainerEl.classList.add("hidden"): orderInfoContainerEl.classList.remove("hidden")
     let orderArrayHtml = "";
     orderArray.forEach((current)=>{
         orderArrayHtml += `
-            <div class="inner-item-prices-container">
-                <p class="item">${current.name}</p>
-                <button class="remove-btn" data-food-uuid="${current.uuid}">remove</button>
-                <p class="price">$${current.price}</p>
-            </div>
-            `
+        <div class="inner-item-prices-container">
+        <p class="item">${current.name}</p>
+        <button class="remove-btn" data-food-uuid="${current.uuid}">remove</button>
+        <p class="price">$${current.price}</p>
+        </div>
+        `
     })
-    itemsPricesContainer.innerHTML = orderArrayHtml
-    priceEl.textContent = "$"+(orderArray.reduce((acc,current)=>acc + current.price,0) || 0)
+    totalCost = orderArray.reduce((acc,current)=>acc + current.price,0) || 0;
+    handleDiscount()
+    if(burgerPizzaBeerDiscount){
+        orderArrayHtml+=`
+            <div class="inner-item-prices-container">
+                <p class="item">Bundle discount</p>
+                <p class="price">-$${((menuArray[0].price + menuArray[1].price + menuArray[2].price) * DISCOUNT).toFixed(2)}</p>
+            </div>
+        `
+    }
+    itemsPricesContainer.innerHTML = orderArrayHtml;
+    renderTotalCost()
 }
 
+//Renders total cost onto the screen from the totalCost variable
+function renderTotalCost(){
+    const priceEl = document.getElementById("total-price-value");
+    priceEl.textContent = "$"+totalCost;
+}
+
+// Determines if the user has selected all 3 items and applies the bundle
+function handleDiscount(){
+    const containsPizza = orderArray.filter((item)=>item.name === "Pizza").length > 0;
+    const containsHamburger = orderArray.filter((item)=>item.name === "Hamburger").length > 0;
+    const containsBeer = orderArray.filter((item)=>item.name === "Beer").length > 0;
+
+    console.log(containsHamburger)
+    console.log(containsPizza)
+    if(containsBeer && containsHamburger && containsPizza){
+        burgerPizzaBeerDiscount = true;
+        totalCost =  ((totalCost - (menuArray[0].price + menuArray[1].price + menuArray[2].price) + ((menuArray[0].price + menuArray[1].price + menuArray[2].price) * (1-DISCOUNT)))).toFixed(2)
+    } else {
+        burgerPizzaBeerDiscount = false;
+    }
+}
+
+// Renders the menu from menyArray on load.
 function renderMenuArray(){
     const outerItemsContainer = document.getElementById("outer-items-container");
     let menuItemsHtml = ""; 
