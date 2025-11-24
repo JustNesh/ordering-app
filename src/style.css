@@ -52,8 +52,8 @@ h2{
 .icon{
   margin: 12px 0 0 0;
   padding: 0;
-  margin-left: 20px;
-  width: 14%;
+  margin-left: 30px;
+  width: 13%;
 }
 
 .food-information{
@@ -189,6 +189,7 @@ h2{
   display: none;
 }
 
+
 form{
   display: flex;
   flex-direction: column;
@@ -234,6 +235,11 @@ form button{
   transition: all .25s;
 }
 
-form button:hover{
+form button:disabled{
+  background-color: #8B8B8B;
+  cursor: not-allowed;
+}
+
+form button:hover:enabled, form button:focus:enabled{
   background-color: #15c58b;
 }

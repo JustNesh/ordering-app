@@ -1,6 +1,7 @@
 import menuArray from './data.js'
 import {generateUUID, randomizeBetweenNumberToChar} from './helperFunctions.js';
 let orderArray = [];
+let isAllowedToPay = false;
 
 document.addEventListener("click",(event)=>{
     if(event.target.dataset.food){
@@ -9,12 +10,53 @@ document.addEventListener("click",(event)=>{
         handleRemoveItem(event)
     } else if(event.target.id === "complete-order-btn"){
         document.querySelector("form").classList.remove("hidden");
-    } else if(event.target.id === "pay-btn"){
+    }
+})
+
+document.querySelector("form").addEventListener("submit",(e)=>{
+    e.preventDefault()
+    if(isAllowedToPay){
         const fName = document.getElementById("full-name").value.split(" ")[0];
         document.querySelector("form").classList.add("hidden");
         alert(`Thanks ${fName}!`)
     }
 })
+
+//This is here, because we need to compare the previous input from itself so the backspace
+//works on the input event listener for the card-number input element
+let previousCardInput = "";
+
+document.addEventListener("input", (event)=>{
+    const eventId = event.target.id;
+    //Ensures that only numbers can be placed into the field
+
+    if (eventId === "card-number" || eventId === "cvv"){
+        event.target.value = event.target.value.replace(/\D/g,"");
+    } else if (eventId ==="full-name"){
+        event.target.value = event.target.value.replace(/\d/g,"");
+    }
+    if(eventId === "card-number"){
+        //Seperates the card number with dashes for readability
+        event.target.value = event.target.value.split("").map((currentChar,i)=>{
+            if(i === 4 || i===8|| i===12 ){
+                return `-${currentChar}`
+            }
+            return currentChar
+        }).join("");
+    }
+
+    //Checks if the user has properly filled out the form before allowing submission
+    if(document.querySelector("#card-number").value.length === 19 &&
+       document.querySelector("#cvv").value.length === 3 &&
+       document.querySelector("#full-name").value.length > 0){
+        isAllowedToPay=true
+        document.querySelector("#pay-btn").removeAttribute("disabled");
+       } else {
+        isAllowedToPay=false
+        document.querySelector("#pay-btn").setAttribute("disabled","disabled");
+       }
+})
+
 
 function handleAddItem(event){
     const menuItemToAdd = menuArray.filter((current)=>current.name === event.target.dataset.food)[0];

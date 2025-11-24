@@ -33,10 +33,10 @@
         <!-- Popup Modal for Checkout -->
         <form class="user-checkout-modal hidden" id="user-checkout-modal" aria-hidden="true">
           <p>Enter card details</p>
-          <input id="full-name" type="text" placeholder="Enter your name"/>
-          <input id="card-number" type="text" placeholder="Enter card number"/>
-          <input id="cvv" type="text" placeholder="Enter CVV"/>
-          <button id="pay-btn">Pay</button>
+          <input id="full-name" type="text" placeholder="Enter your name" required/>
+          <input id="card-number" type="text" placeholder="Enter card number" minlength="18" maxlength="19" required/>
+          <input id="cvv" type="text" pattern="^\d+$" placeholder="Enter CVV" minlength="2" maxlength="3" required/>
+          <button type="submit" disabled id="pay-btn">Pay</button>
         </form>
       </main>
     </div>
